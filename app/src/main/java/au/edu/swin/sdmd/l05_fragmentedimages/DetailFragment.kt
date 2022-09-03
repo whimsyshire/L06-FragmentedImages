@@ -11,6 +11,8 @@ import android.widget.TextView
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_NAME = "name"
 private const val ARG_AUTHOR = "author"
+private const val ARG_LATITUDE = "latitude"
+private const val ARG_LONGITUDE = "longitude"
 
 /**
  * A simple [Fragment] subclass.
@@ -21,12 +23,17 @@ class DetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var name: String? = null
     private var author: String? = null
+    private var latitude: String? = null
+    private var longitude: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println(savedInstanceState)
         arguments?.let {
             name = it.getString(ARG_NAME)
             author = it.getString(ARG_AUTHOR)
+            latitude = it.getString(ARG_LATITUDE)
+            longitude = it.getString(ARG_LONGITUDE)
         }
     }
 
@@ -44,6 +51,10 @@ class DetailFragment : Fragment() {
         name.text = this.name
         val author = view.findViewById<TextView>(R.id.author)
         author.text = this.author
+        val latitude = view.findViewById<TextView>(R.id.latitude)
+        latitude.text = this.latitude
+        val longitude = view.findViewById<TextView>(R.id.longitude)
+        longitude.text = this.longitude
         return view
     }
 
@@ -58,11 +69,13 @@ class DetailFragment : Fragment() {
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(param1: String, param2: String, param3: Float, param4: Float) =
             DetailFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_NAME, name)
                     putString(ARG_AUTHOR, author)
+                    putString(ARG_LATITUDE, latitude)
+                    putString(ARG_LONGITUDE, longitude)
                 }
             }
     }

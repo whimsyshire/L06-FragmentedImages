@@ -1,5 +1,6 @@
 package au.edu.swin.sdmd.l05_fragmentedimages
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -22,8 +23,16 @@ class MainActivity : AppCompatActivity() {
 
         val vStation = findViewById<TextView>(R.id.station)
         vStation.setOnClickListener {
-            val myFragment = DetailFragment.newInstance(station.name, station.author)
+            val myFragment = DetailFragment.newInstance(station.name, station.author, station.latitude, station.longitude)
             fm.beginTransaction().replace(R.id.fragment, myFragment).commit()
+
+        }
+
+        val vStationActivity = findViewById<TextView>(R.id.station_activity)
+        vStationActivity.setOnClickListener {
+            val myIntent = Intent(this, DetailActivity::class.java)
+            myIntent.putExtra("location", station);
+            startActivity(myIntent)
         }
     }
 
